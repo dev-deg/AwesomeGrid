@@ -19,8 +19,21 @@ public class GridSystem
 
         this._boxArray = new int[width,height];
 
+        for (int x = 0; x < _boxArray.GetLength(0); x++)
+        {
+            for (int y = 0; y < _boxArray.GetLength(1); y++)
+            {
+                Debug.DrawLine(GetWorldPosition(new Vector2Int(x, y)), GetWorldPosition(new Vector2Int(x + 1, y)),Color.white,100f);
+                Debug.DrawLine(GetWorldPosition(new Vector2Int(x, y)), GetWorldPosition(new Vector2Int(x, y + 1)), Color.white,100f);
+            }
+        }
+        //Add the two missing lines
 
-        
+    }
+
+    private Vector3 GetWorldPosition(Vector2Int coords)
+    {
+        return new Vector3(coords.x,coords.y) * _boxSize + _origin ;
     }
 
 }
