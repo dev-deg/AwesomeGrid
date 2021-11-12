@@ -19,11 +19,15 @@ public class GridController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+
+        //After I click a cell, something happens
+        Vector3 worldMousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        int currentValue = int.Parse(_gridSystem.getValue(worldMousePosition));
+         if(currentValue != -1)
         {
-            //After I click a cell, something happens
-            Vector3 worldMousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
-            _gridSystem.setValue(worldMousePosition, "1");
+            currentValue++;
+            _gridSystem.setValue(worldMousePosition, currentValue.ToString());
         }
     }
 }

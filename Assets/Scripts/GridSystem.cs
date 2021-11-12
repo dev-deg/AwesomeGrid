@@ -82,7 +82,7 @@ public class GridSystem
     }
 
     //Function overload of get Value (input is worldPosition)
-    public string getValue(Vector3 worldPosition, string value)
+    public string getValue(Vector3 worldPosition)
     {
         Vector2Int pos = getGridCoords(worldPosition);
         return getValue(pos);
