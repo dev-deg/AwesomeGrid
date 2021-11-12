@@ -46,6 +46,7 @@ public class GridSystem
         return new Vector3(coords.x,coords.y) * _boxSize + _origin ;
     }
 
+    //Sets the value of a text component
     public void setValue(Vector2Int coords, string value)
     {
         if ((coords.x >= 0 && coords.x < _width) &&
@@ -59,6 +60,14 @@ public class GridSystem
         }
     }
 
+    //Function overload of set Value (input is worldPosition)
+    public void setValue(Vector3 worldPosition, string value)
+    {
+        Vector2Int pos = getGridCoords(worldPosition);
+        setValue(pos, value);
+    }
+
+    //Gets the value of a text component
     public string getValue(Vector2Int coords)
     {
         if ((coords.x >= 0 && coords.x < _width) &&
@@ -70,6 +79,21 @@ public class GridSystem
         {
             return "-1";
         }
+    }
+
+    //Function overload of get Value (input is worldPosition)
+    public string getValue(Vector3 worldPosition, string value)
+    {
+        Vector2Int pos = getGridCoords(worldPosition);
+        return getValue(pos);
+    }
+
+    //Converting the world position of the grid into x and y values representing out boxes
+    private Vector2Int getGridCoords(Vector3 worldPosition)
+    {
+        int x = Mathf.FloorToInt((worldPosition - this._origin).x / _boxSize); //Converting float to int (floor)
+        int y = Mathf.FloorToInt((worldPosition - this._origin).y / _boxSize); //Converting float to int (floor)
+        return new Vector2Int(x,y);
     }
 
 }

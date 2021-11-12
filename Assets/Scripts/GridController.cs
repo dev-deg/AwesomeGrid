@@ -6,7 +6,7 @@ public class GridController : MonoBehaviour
 {
     [SerializeField] private GameObject text; //Reference to our text prefab
     [SerializeField] private Canvas canvas; //Reference to the canvas (as a parent)
-
+    [SerializeField] private Camera cam;
 
     private GridSystem _gridSystem;
 
@@ -14,8 +14,16 @@ public class GridController : MonoBehaviour
     {
         //Instantiating our grid system
         _gridSystem = new GridSystem(10, 10, 1f, new Vector3(-5, -5),text,canvas);
-        //To test our new functions
-        _gridSystem.setValue(new Vector2Int(4, 4), "25");
-        Debug.Log(_gridSystem.getValue(new Vector2Int(2, 2)));
+
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            //After I click a cell, something happens
+            Vector3 worldMousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+            _gridSystem.setValue(worldMousePosition, "1");
+        }
     }
 }
